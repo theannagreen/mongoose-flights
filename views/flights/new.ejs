@@ -1,0 +1,38 @@
+<%- include('../partials/header') %>
+
+<h2>Enter a New Flight</h2>
+<form action="/flights" method="POST">
+  <label>Airline:
+    <input type="text" name="flight">
+  </label><br>
+  <label>Flight Number:
+    <input type="number" name="flightNum">
+  </label><br>
+  <label>Airport
+    <select name="airport">
+      <option value="LAX">LAX</option>
+      <option value="JFK">JFK</option>
+      <option value="FLL">FLL</option>
+      <option value="LGA">LGA</option>
+      <option value="ALB">ALB</option>
+      <option value="FLL">FLL</option>
+      <option value="MIA">MIA</option>
+      <option value="ATL">ATL</option>
+      <option value="MDW">MDW</option>
+      <option value="BOS">BOS</option>
+      <option value="AVL">AVL</option>
+      <option value="CTL">CTL</option>
+      <option value="RDU">RDU</option>
+      <option value="GSP">GPS</option>
+    </select>
+  </label><br>
+  <label>Departs:
+    <input type="date" name="departs">
+  </label><br>
+  <label>On Time:
+    <input type="checkbox" name="onTime" checked>
+  </label><br>
+  <button type="submit">Add Flight</button>
+</form>
+
+<%- include('../partials/footer') %>

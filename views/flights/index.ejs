@@ -1,0 +1,29 @@
+<%- include('../partials/header') %>
+
+<h2>Flights List</h2>
+<table>
+  <thead>
+    <tr>
+      <th>Airline</th>
+      <th>Flight Number</th>
+      <th>Airport</th>
+      <th>Departs</th>
+      <th>On Time</th>
+    </tr>
+  </thead>
+    <tbody>
+    <!-- Write the line of EJS to iterate over flights using forEach -->
+    <% flights.forEach((f) => { %>  
+        <tr>
+            <td><%= f.airline %></td>
+            <td><%= f.airport %></td>
+            <td><%= f.flightNum %></td>
+            <td><%= f.departs %></td>
+            <td><%= f.onTime ?  'Yes' : 'No' %></td>
+        </tr>
+    <!-- Close the forEach using EJS here -->
+    <% }) %>
+  </tbody>
+</table>
+
+<%- include('../partials/footer') %>
