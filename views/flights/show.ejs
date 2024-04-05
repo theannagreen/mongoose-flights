@@ -1,7 +1,16 @@
 <%- include('../partials/header')  %>
 
 <h3><%= flight.flight %></h3>
-<h3>Complete: <%= flight.done ? 'Yes' : 'No' %></h3>
-<a href="../flight/<%= id %>/edit">Edit Flight</a>
+<h3>On Time: <%= flight.done ? 'Yes' : 'No' %></h3>
+<a href="../flight/<%= flight._id %>/edit">Edit Flight</a>
+
+<h4>Destinations:</h4>
+<ul>
+    <% flight.destinations.forEach(function(destination) { %>
+        <li>Airport: <%= destination.airport %>, Arrival: <%= destination.arrival %></li>
+  <% }); %>
+</ul>
+
+<a href="../flight/<%= flight._id %>/edit">Edit Flight</a>
 
 <%- include('../partials/footer')  %>

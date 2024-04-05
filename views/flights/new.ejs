@@ -3,36 +3,75 @@
 <h2>Enter a New Flight</h2>
 <form action="/flights" method="POST">
   <label>Airline:
-    <input type="text" name="flight">
+    <input type="text" name="airline">
   </label><br>
   <label>Flight Number:
-    <input type="number" name="flightNum">
+    <input type="number" name="flightNumber">
   </label><br>
-  <label>Airport
-    <select name="airport">
-      <option value="LAX">LAX</option>
-      <option value="JFK">JFK</option>
-      <option value="FLL">FLL</option>
-      <option value="LGA">LGA</option>
-      <option value="ALB">ALB</option>
-      <option value="FLL">FLL</option>
-      <option value="MIA">MIA</option>
-      <option value="ATL">ATL</option>
-      <option value="MDW">MDW</option>
-      <option value="BOS">BOS</option>
-      <option value="AVL">AVL</option>
-      <option value="CTL">CTL</option>
-      <option value="RDU">RDU</option>
-      <option value="GSP">GPS</option>
-    </select>
-  </label><br>
-  <label>Departs:
-    <input type="date" name="departs">
-  </label><br>
+  <div id="destinations">
+    <div class="destination">
+      <label>Airport
+        <select name="airport[]">
+          <option value="LAX">LAX</option>
+          <option value="JFK">JFK</option>
+          <option value="FLL">FLL</option>
+          <option value="LGA">LGA</option>
+          <option value="ALB">ALB</option>
+          <option value="FLL">FLL</option>
+          <option value="MIA">MIA</option>
+          <option value="ATL">ATL</option>
+          <option value="MDW">MDW</option>
+          <option value="BOS">BOS</option>
+          <option value="AVL">AVL</option>
+          <option value="CTL">CTL</option>
+          <option value="RDU">RDU</option>
+          <option value="GSP">GPS</option>
+        </select>
+      </label><br>
+      <label>Departure:
+        <input type="date" name="departure[]">
+      </label><br>
+    </div>
+  </div>
+  <button type="button" onclick="addDestination()">Add destination</button>
+  <label>Arrival:
+    <input type="date" name="arrival">
+  </label>
   <label>On Time:
     <input type="checkbox" name="onTime" checked>
   </label><br>
+  <button type="button" onclick="addDestination()">Add Destination</button><br>
   <button type="submit">Add Flight</button>
 </form>
-
+<script>
+  function addDestination() {
+    const destinations = document.getElementById('destinations');
+    const destination = document.createElement('div');
+    destination.classList.add('destination');
+    destination.innerHTML = `
+      <label>Airport:
+        <select name="airport[]">
+          <option value="LAX">LAX</option>
+          <option value="JFK">JFK</option>
+          <option value="FLL">FLL</option>
+          <option value="LGA">LGA</option>
+          <option value="ALB">ALB</option>
+          <option value="FLL">FLL</option>
+          <option value="MIA">MIA</option>
+          <option value="ATL">ATL</option>
+          <option value="MDW">MDW</option>
+          <option value="BOS">BOS</option>
+          <option value="AVL">AVL</option>
+          <option value="CTL">CTL</option>
+          <option value="RDU">RDU</option>
+          <option value="GSP">GPS</option>
+        </select>
+      </label><br>
+      <label>Departure:
+        <input type="date" name="departure[]">
+      </label><br>
+    `;
+    destinations.appendChild(destination);
+  }
+</script>
 <%- include('../partials/footer') %>
