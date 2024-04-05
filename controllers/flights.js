@@ -1,5 +1,5 @@
 // import flight model 
-const Flight = require('../models/flights');
+const Flight = require('../models/flight');
 
 // set up module.exports
 module.exports = {
@@ -38,15 +38,21 @@ async function index(req, res) {
 }
 
 // controller function to render the details of a specific flight 
+// controller function to render the details of a specific flight 
 async function show(req, res) {
     try {
-        const flight = await Flight.findById(req.params.id).populate('destinations');
+        const flight = await Flight.findById(req.params.id)
+            .populate('destinations')
+            .populate('tickets');
         if (!flight) {
             return res.status(404).send('Flight not found');
         }
-        res.render('flights/show', { title: 'Flight Detail', flight });
+        // Define availableAirports here or fetch it from somewhere
+        const availableAirports = ['AUS', 'JFK', 'LGA', 'LAX', 'AVL'];
+        res.render('flights/show', { title: 'Flight Detail', flight, availableAirports });
     } catch (error) {
         console.log(error);
         res.render('error', { message: 'Error retrieving flight details' })
     }
- }
+}
+

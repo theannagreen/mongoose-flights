@@ -35,34 +35,12 @@ const flightSchema = new Schema({
         required: true,
         default: "Default Content"
     },
-    destinations: [destinationSchema]
+    destinations: [destinationSchema],
+    tickets: [{ type: Schema.Types.ObjectId, ref: 'Ticket'}]
 }, {
     timestamps: true
 });
 
 module.exports = mongoose.model('Flight', flightSchema);
 
-// const movieSchema = new Schema({
-    //     title: {
-        //         type: String,
-        //         required: true
-        //     },
-        //     reviews: [reviewSchema]
-        // });
-        // const Movie = mongoose.model('Movie', movieSchema);
-        // // const flightSchema = new Schema({
-            // //     airline: String,
-            // //     airport: String,
-            // //     flightNum: Number,
-            // //     departs: Date,
-            // //     onTime: Boolean
-            // // }, {timestamps: true});
-            
-            // /*
-            // timestamps = true will create two addtional field
-            // createAt
-            // updatedAt
-            // */
-            
-// // Compile the schema into a model, and
-// // Export that model.
+
