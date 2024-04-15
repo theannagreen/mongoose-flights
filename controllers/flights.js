@@ -10,9 +10,10 @@ module.exports = {
 };
 
 // set up controller functions to render the new flight form 
-function newFlight(req, res) {
-    // console.log(__dirname);
-    res.render('flights/new', { title: 'New Flight', errorMsg: '' });
+async function newFlight(req, res) {
+    const newFlight = new Flight();
+    // Obtain the default date
+    const dt = newFlight.departs;
 }
 
 // controller function to handle flight creation 
@@ -37,7 +38,6 @@ async function index(req, res) {
     }
 }
 
-// controller function to render the details of a specific flight 
 // controller function to render the details of a specific flight 
 async function show(req, res) {
     try {

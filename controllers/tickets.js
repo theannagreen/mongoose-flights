@@ -2,42 +2,41 @@
 const Ticket = require('../models/ticket');
 const Flight = require('../models/flight');
 
-//new
-exports.new = async (req, res) => {
-    try {
-      const flightId = req.params.id; 
-      res.render('tickets/new', { title: 'New Ticket', flightId });
-    } catch (err) {
-      console.error(err);
-      res.redirect('/flights');
-    }
-};
-//create
-exports.create = async (req, res) => {
-    try {
-      req.body.flight = req.params.id; 
-      const ticket = new Ticket(req.body);
-      await ticket.save();
-      res.redirect(`/flights/${req.params.id}`); 
-    } catch (error) {
-      console.error('Error creating ticket:', error);
-      res.redirect(`/flights/${req.params.id}`);
-    }
-  };
+function newTicket(req, res) {
+  res.render("tickets/new", {
+    title: "Add Ticket",
+    flightId: req.params.id,
+    error: "",
+  });
+}
 
-//delete 
-  exports.delete = async (req, res) => {
-    try {
-      await Ticket.findByIdAndDelete(req.params.ticketId);
-      res.redirect(`/flights/${req.params.flightId}`);
-    } catch (error) {
-      console.error('Error deleting ticket:', error);
-      res.redirect(`/flights/${req.params.flightId}`);
-    }
-  };
+async function create(req, res) {
+  try {
+    const flight = await Flight.findById(req.params.id);
+    const ticket = new Ticket(req.body);
+    ticket.flight = flight;
+    await ticket.save();
+    res.redirect(`/flights/${flight._id}`);
+  } catch (err) {
+    res.render("tickets/new", {
+      title: "Add Ticket",
+      flightId: req.params.id,
+      error: err.message,
+    });
+  }
+}
+
+async function deleteTicket(req, res) {
+    console.log(req.params);
+  const flight = await Flight.findById(req.params.id);
+  const ticket = await Ticket.findByIdAndDelete(req.params.ticketId);
+  console.log(ticket);
+
+  res.redirect(`/flights/${flight._id}`);
+}
 
 module.exports = {
-  new: exports.new,
-  create: exports.create,
-  delete: exports.delete
+  new: newTicket,
+  create,
+  delete: deleteTicket
 };

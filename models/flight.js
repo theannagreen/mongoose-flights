@@ -24,7 +24,7 @@ const destinationSchema = new Schema({
 const flightSchema = new Schema({
     airline: {
         type: String,
-        required: true
+        enum: ["American", "Southwest", "United", "Spirit", "Delta", "JetBlue"],
     }, 
     flightNumber: {
         type: Number,

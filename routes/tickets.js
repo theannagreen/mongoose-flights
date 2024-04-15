@@ -8,7 +8,7 @@ router.get('/flights/:id/tickets/new', ticketsCtrl.new);
 //Process the form
 router.post('/flights/:id/tickets', ticketsCtrl.create); 
 // delete ticket 
-router.delete('/flights/:flightId/tickets/:ticketId', ticketsCtrl.delete);
+router.delete('/flights/:id/tickets/:tickets', ticketsCtrl.delete);
 
 
 module.exports = router;
